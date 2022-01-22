@@ -17,3 +17,8 @@ use Illuminate\Support\Facades\Route;
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
+Route::group(['prefix' => 'events'], function () {
+    Route::get('/', 'EventController@index');
+    Route::post('/{id}', 'EventController@store')->middleware('checkUser');
+    Route::put('/{id}', 'EventController@update')->middleware('checkUser');
+});
